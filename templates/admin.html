@@ -1,0 +1,19 @@
+<h2>Admin Dashboard</h2>
+
+<table border="1">
+  <tr>
+    <th>User ID</th>
+    <th>Email</th>
+    <th>File Count</th>
+  </tr>
+
+  {% for row in data %}
+  <tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="/dashboard">Back</a>

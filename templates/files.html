@@ -1,0 +1,13 @@
+<h2>My Files</h2>
+
+<ul>
+  {% for file in files %}
+    <li>
+      {{ file[1] }} (uploaded at {{ file[3] }})
+      <a href="/download/{{ file[0] }}">Download</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="/upload">Upload New File</a><br>
+<a href="/dashboard">Back</a>
