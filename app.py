@@ -10,9 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # change in production
 
-# ----------------------
-# Helper: Login Required
-# ----------------------
+
 def login_required(func):
     def wrapper(*args, **kwargs):
         if "user_id" not in session:
@@ -27,16 +25,12 @@ s3 = boto3.client(
 )
 BUCKET = os.getenv("S3_BUCKET")
 
-# ----------------------
-# Home
-# ----------------------
+
 @app.route("/")
 def home():
     return redirect("/login")
 
-# ----------------------
-# Register
-# ----------------------
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -65,9 +59,7 @@ def register():
 
     return render_template("register.html")
 
-# ----------------------
-# Login
-# ----------------------
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -98,17 +90,13 @@ def login():
 
     return render_template("login.html")
 
-# ----------------------
-# Dashboard (Protected)
-# ----------------------
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
     return render_template("dashboard.html", email=session["email"])
 
-# ----------------------
-# Logout
-# ----------------------
+
 @app.route("/logout")
 def logout():
     session.clear()
@@ -244,8 +232,6 @@ def admin():
     return render_template("admin.html", data=data)
 
 
-# ----------------------
-# Run App
-# ----------------------
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
